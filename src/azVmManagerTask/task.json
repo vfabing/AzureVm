@@ -17,7 +17,7 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 5
+        "Patch": 8
     },
     "instanceNameFormat": "Azure VM",
     "inputs": [
@@ -43,12 +43,12 @@
             }
         },
         {
-            "name": "samplestring",
+            "name": "vmName",
             "type": "string",
-            "label": "Sample String",
+            "label": "Virtual machine name",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "A sample string"
+            "helpMarkDown": "Provide the name of a virtual machine."
         }
     ],
     "execution": {

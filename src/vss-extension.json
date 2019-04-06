@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "AzureVirtualMachineManagerTask",
     "name": "Azure Virtual Machine Manager Task",
-    "version": "0.0.5",
+    "version": "0.0.8",
     "publisher": "vfabing",
     "targets": [
         {
@@ -14,7 +14,7 @@
         "Azure Pipelines"
     ],
     "icons": {
-        "default": "images/icon.png"
+        "default": "images/128px-Computer.svg.png"
     },
     "files": [
         {
