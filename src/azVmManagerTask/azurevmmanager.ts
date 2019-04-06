@@ -5,20 +5,28 @@ import path = require("path");
 
 async function run() {
     try {
-        const inputString: string = tl.getInput('samplestring', true);
-        if (inputString == 'bad') {
-            tl.setResult(tl.TaskResult.Failed, 'Bad input was given');
-            return;
-        }
-        console.log('Hello', inputString);
+        var vmName: string = tl.getInput('vmName', true);
+        var resourceGroupName = tl.getInput("resourceGroupName", true);
+
+        console.log(`vmName=${vmName}`);
+        console.log(`resourceGroupName=${resourceGroupName}`);
 
         var connectedService = tl.getInput("ConnectedServiceName", true);
         var subscriptionId = tl.getEndpointDataParameter(connectedService, "SubscriptionId", true);
         var azureEndpoint = await new AzureRMEndpoint(connectedService).getEndpoint();
         var credentials = azureEndpoint.applicationTokenCredentials;
 
-        var resourceGroupName = tl.getInput("resourceGroupName", true);
-            
+        var computeClient = new armCompute.ComputeManagementClient(credentials, subscriptionId);
+
+        console.log(`Starting ${vmName}`);
+        computeClient.virtualMachines.start(resourceGroupName, vmName, (error) => 
+        {
+            if(error) {
+                tl.setResult(tl.TaskResult.Failed, `Could not start ${vmName}`);
+            } else {
+                console.log(`Started ${vmName}`)
+            }
+        });
     }
     catch (err) {
         tl.setResult(tl.TaskResult.Failed, err.message);

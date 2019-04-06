@@ -24,7 +24,6 @@ describe('Sample task tests', function () {
         assert.equal(tr.warningIssues.length, 0, "should have no warnings");
         assert.equal(tr.errorIssues.length, 0, "should have no errors");
         console.log(tr.stdout);
-        assert.equal(tr.stdout.indexOf('Hello World') >= 0, true, "should display Hello human");
         done();
     });
 });

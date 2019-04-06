@@ -7,8 +7,8 @@ let tmr: tmrm.TaskMockRunner = new tmrm.TaskMockRunner(taskPath);
 
 
 tmr.setInput("ConnectedServiceName", "AzureRM");
-tmr.setInput("resourceGroupName", "dummy");
-tmr.setInput('samplestring', 'World');
+tmr.setInput("resourceGroupName", "myVm-rg");
+tmr.setInput('vmName', 'myVm');
 
 process.env["AGENT_TEMPDIRECTORY"] = path.join(__dirname, '..');
 process.env["ENDPOINT_AUTH_AzureRM"] = "{\"parameters\":{\"serviceprincipalid\":\"id\",\"serviceprincipalkey\":\"key\",\"tenantid\":\"tenant\"},\"scheme\":\"ServicePrincipal\"}";
