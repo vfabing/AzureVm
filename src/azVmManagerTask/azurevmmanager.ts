@@ -1,6 +1,7 @@
-import tl = require('azure-pipelines-task-lib/task');
+import tl = require("vsts-task-lib/task");
 import armCompute = require("azure-arm-rest/azure-arm-compute");
 import { AzureRMEndpoint } from 'azure-arm-rest/azure-arm-endpoint';
+import path = require("path");
 
 async function run() {
     try {
@@ -23,5 +24,9 @@ async function run() {
         tl.setResult(tl.TaskResult.Failed, err.message);
     }
 }
+
+var taskManifestPath = path.join(__dirname, "task.json");
+tl.debug("Setting resource path to " + taskManifestPath);
+tl.setResourcePath(taskManifestPath);
 
 run();

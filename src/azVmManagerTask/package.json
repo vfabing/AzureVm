@@ -1,21 +1,21 @@
 {
-  "name": "azVmManagerTask",
-  "version": "0.0.1",
-  "description": "",
-  "main": "azurevmmanager.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "azure-arm-rest": "file:../../_build/Tasks/Common/azure-arm-rest-1.0.2.tgz",
-    "azure-pipelines-task-lib": "^2.8.0"
-  },
-  "devDependencies": {
-    "@types/mocha": "^5.2.6",
-    "@types/node": "^11.13.0",
-    "@types/q": "^1.5.2"
-  }
+    "name": "azVmManagerTask",
+    "version": "0.0.5",
+    "description": "",
+    "main": "azurevmmanager.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "azure-arm-rest": "file:../../_build/Tasks/Common/azure-arm-rest-1.0.2.tgz",
+        "vsts-task-lib": "^2.0.5"
+    },
+    "devDependencies": {
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^11.13.0",
+        "@types/q": "^1.5.2"
+    }
 }

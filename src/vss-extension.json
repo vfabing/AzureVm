@@ -1,36 +1,36 @@
 {
-  "manifestVersion": 1,
-  "id": "AzureVirtualMachineManagerTask",
-  "name": "Azure Virtual Machine Manager Task",
-  "version": "0.0.1",
-  "publisher": "vfabing",
-  "targets": [
-    {
-      "id": "Microsoft.VisualStudio.Services"
-    }
-  ],
-  "description": "Tools for manager Azure Virtual Machine",
-  "categories": [
-    "Azure Pipelines"
-  ],
-  "icons": {
-    "default": "images/icon.png"
-  },
-  "files": [
-    {
-      "path": "azVmManagerTask"
-    }
-  ],
-  "contributions": [
-    {
-      "id": "custom-build-release-task",
-      "type": "ms.vss-distributed-task.task",
-      "targets": [
-        "ms.vss-distributed-task.tasks"
-      ],
-      "properties": {
-        "name": "azVmManagerTask"
-      }
-    }
-  ]
+    "manifestVersion": 1,
+    "id": "AzureVirtualMachineManagerTask",
+    "name": "Azure Virtual Machine Manager Task",
+    "version": "0.0.5",
+    "publisher": "vfabing",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "description": "Tools for managing Azure Virtual Machine",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "images/icon.png"
+    },
+    "files": [
+        {
+            "path": "azVmManagerTask"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "custom-build-release-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "azVmManagerTask"
+            }
+        }
+    ]
 }

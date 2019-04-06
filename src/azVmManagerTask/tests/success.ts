@@ -1,5 +1,5 @@
-import ma = require('azure-pipelines-task-lib/mock-answer');
-import tmrm = require('azure-pipelines-task-lib/mock-run');
+import ma = require('vsts-task-lib/mock-answer');
+import tmrm = require('vsts-task-lib/mock-run');
 import path = require('path');
 
 let taskPath = path.join(__dirname, '..', 'azurevmmanager.js');
@@ -10,7 +10,7 @@ tmr.setInput("ConnectedServiceName", "AzureRM");
 tmr.setInput("resourceGroupName", "dummy");
 tmr.setInput('samplestring', 'World');
 
-process.env["AGENT_TEMPDIRECTORY"] = path.join(__dirname, '..');;
+process.env["AGENT_TEMPDIRECTORY"] = path.join(__dirname, '..');
 process.env["ENDPOINT_AUTH_AzureRM"] = "{\"parameters\":{\"serviceprincipalid\":\"id\",\"serviceprincipalkey\":\"key\",\"tenantid\":\"tenant\"},\"scheme\":\"ServicePrincipal\"}";
 process.env["ENDPOINT_AUTH_PARAMETER_AzureRM_SERVICEPRINCIPALID"] = "id";
 process.env["ENDPOINT_AUTH_PARAMETER_AzureRM_SERVICEPRINCIPALKEY"] = "key";

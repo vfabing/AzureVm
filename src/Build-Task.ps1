@@ -75,4 +75,5 @@ Update-TaskManifest -MajorVersionNumber $MajorVersionNumber -MinorVersionNumber 
 
 Update-PackageManifest -MajorVersionNumber $MajorVersionNumber -MinorVersionNumber $MinorVersionNumber -PatchVersionNumber $PatchVersionNumber
 
+tsc --build azVmManagerTask/tsconfig.json
 tfx extension create --manifest-globs vss-extension.json
