@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "AzureVirtualMachineManagerTask",
     "name": "Azure Virtual Machine Manager Task",
-    "version": "0.0.8",
+    "version": "0.0.11",
     "publisher": "vfabing",
     "targets": [
         {
@@ -16,9 +16,46 @@
     "icons": {
         "default": "images/128px-Computer.svg.png"
     },
+    "tags": [
+        "Azure",
+        "Resource Manager",
+        "Virtual Machine",
+        "Start"
+    ],
+    "screenshots": [
+        {
+            "path": "images/Configure-Azure-VM-Start.png"
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "overview.md"
+        },
+        "license": {
+            "path": "LICENSE.txt"
+        }
+    },
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/vfabing/AzureVm/blob/master/src/overview.md"
+        },
+        "support": {
+            "uri": "https://github.com/vfabing/AzureVm/issues"
+        },
+        "repository": {
+            "uri": "https://github.com/vfabing/AzureVm"
+        },
+        "issues": {
+            "uri": "https://github.com/vfabing/AzureVm/issues"
+        }
+    },
     "files": [
         {
             "path": "azVmManagerTask"
+        },
+        {
+            "path": "images",
+            "addressable": true
         }
     ],
     "contributions": [
