@@ -74,7 +74,7 @@ If(Test-Path -Path "azVmManagerTask/node_modules/azure-arm-rest/openssl/OpenSSL 
     Rename-Item -Path "azVmManagerTask/node_modules/azure-arm-rest/openssl/OpenSSL License.txt" -NewName "OpenSSL_License.txt"
 }
 
-Write-Output "Current Version Number $($MajorVersionNumber).$($MinorVersionNumber).$($PatchVersionNumber) updating to ==> $($MajorVersionNumber).$($MinorVersionNumber).$((++$PatchVersionNumber))"
+Write-Output "Version Number $($MajorVersionNumber).$($MinorVersionNumber).$($PatchVersionNumber)"
 
 Update-VssExtensionManifest -MajorVersionNumber $MajorVersionNumber -MinorVersionNumber $MinorVersionNumber -PatchVersionNumber $PatchVersionNumber
 
