@@ -63,8 +63,15 @@ function Update-PackageManifest ([int]$MajorVersionNumber, [int]$MinorVersionNum
     Write-Output "PackageManifest updated"
 }
 
-if($PatchVersionNumber -eq -2){
+if($PatchVersionNumber -lt -1){
     $PatchVersionNumber = Get-CurrentBuildNumberFromTaskManifest
+}
+
+If(Test-Path -Path "azVmManagerTask/node_modules/azure-arm-rest/openssl/OpenSSL License.txt") 
+{ 
+    Write-Output "Whitespace in filename found [[OpenSSL License.txt]]";
+    Write-Output "Renaming to  [[OpenSSL_License.txt]]";
+    Rename-Item -Path "azVmManagerTask/node_modules/azure-arm-rest/openssl/OpenSSL License.txt" -NewName "OpenSSL_License.txt"
 }
 
 Write-Output "Current Version Number $($MajorVersionNumber).$($MinorVersionNumber).$($PatchVersionNumber) updating to ==> $($MajorVersionNumber).$($MinorVersionNumber).$((++$PatchVersionNumber))"
