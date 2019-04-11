@@ -1,7 +1,8 @@
 param(
     [Int]$MajorVersionNumber = 0,
     [Int]$MinorVersionNumber = 0,
-    [Int]$PatchVersionNumber = -2
+    [Int]$PatchVersionNumber = -2,
+    [bool]$IsPublic = $false
 )
 
 function Get-CurrentBuildNumberFromTaskManifest
@@ -19,13 +20,33 @@ function Get-CurrentBuildNumberFromTaskManifest
     return $PatchVersionNumber;
 }
 
-function Update-VssExtensionManifest ([int]$MajorVersionNumber, [int]$MinorVersionNumber, [int]$PatchVersionNumber, [String]$VssExtensionFilePath = "vss-extension.json")
+function Update-VssExtensionManifest ([int]$MajorVersionNumber, [int]$MinorVersionNumber, [int]$PatchVersionNumber, [String]$VssExtensionFilePath = "vss-extension.json", [bool]$IsPublic)
 {
     # Get JSON File
     $VssExtensionManifest = Get-Content $VssExtensionFilePath | Out-String | ConvertFrom-Json
 
     # Save New Version Number to JSON
     $VssExtensionManifest.version = "$($MajorVersionNumber).$($MinorVersionNumber).$($PatchVersionNumber)";
+
+    if(-Not ($IsPublic))
+    {
+        Write-Output "IsPublic = false";
+        if(-Not ($VssExtensionManifest.id.Contains("-private")))
+        {
+            $VssExtensionManifest.id = "$($VssExtensionManifest.id)-private";
+            $VssExtensionManifest.public = "false";
+        }
+    }
+    else 
+    {
+        Write-Output "IsPublic = true";
+        if($VssExtensionManifest.id.Contains("-private"))
+        {
+            $VssExtensionManifest.id = $VssExtensionManifest.id -replace "-private";
+            $VssExtensionManifest.public = "true";
+        }
+    }
+
 
     # Save JSON File
     $VssExtensionManifest | ConvertTo-Json -depth 100 | Set-Content $VssExtensionFilePath
@@ -76,7 +97,7 @@ If(Test-Path -Path "azVmManagerTask/node_modules/azure-arm-rest/openssl/OpenSSL 
 
 Write-Output "Version Number $($MajorVersionNumber).$($MinorVersionNumber).$($PatchVersionNumber)"
 
-Update-VssExtensionManifest -MajorVersionNumber $MajorVersionNumber -MinorVersionNumber $MinorVersionNumber -PatchVersionNumber $PatchVersionNumber
+Update-VssExtensionManifest -MajorVersionNumber $MajorVersionNumber -MinorVersionNumber $MinorVersionNumber -PatchVersionNumber $PatchVersionNumber -IsPublic $IsPublic
 
 Update-TaskManifest -MajorVersionNumber $MajorVersionNumber -MinorVersionNumber $MinorVersionNumber -PatchVersionNumber $PatchVersionNumber
 
