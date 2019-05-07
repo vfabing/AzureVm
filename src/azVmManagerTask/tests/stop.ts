@@ -6,9 +6,10 @@ let taskPath = path.join(__dirname, '..', 'azurevmmanager.js');
 let tmr: tmrm.TaskMockRunner = new tmrm.TaskMockRunner(taskPath);
 
 
+tmr.setInput('Action', 'Stop VM');
 tmr.setInput("ConnectedServiceName", "AzureRM");
-tmr.setInput("resourceGroupName", "myVm-rg");
-tmr.setInput('vmName', 'myVm');
+tmr.setInput("ResourceGroupName", "myVm-rg");
+tmr.setInput('VmName', 'myVm');
 
 process.env["AGENT_TEMPDIRECTORY"] = path.join(__dirname, '..');
 process.env["ENDPOINT_AUTH_AzureRM"] = "{\"parameters\":{\"serviceprincipalid\":\"id\",\"serviceprincipalkey\":\"key\",\"tenantid\":\"tenant\"},\"scheme\":\"ServicePrincipal\"}";

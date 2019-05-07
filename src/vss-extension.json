@@ -1,8 +1,8 @@
 {
     "manifestVersion": 1,
-    "id": "AzureVirtualMachineManagerTask-private",
+    "id": "AzureVirtualMachineManagerTask",
     "name": "Azure Virtual Machine Manager Task",
-    "version": "0.0.14",
+    "version": "1.0.1",
     "publisher": "vfabing",
     "targets": [
         {
@@ -70,5 +70,5 @@
             }
         }
     ],
-    "public": "false"
+    "public": true
 }
