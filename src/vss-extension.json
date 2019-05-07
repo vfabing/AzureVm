@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "AzureVirtualMachineManagerTask",
     "name": "Azure Virtual Machine Manager Task",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "publisher": "vfabing",
     "targets": [
         {
@@ -25,6 +25,9 @@
     "screenshots": [
         {
             "path": "images/Configure-Azure-VM-Start.png"
+        },
+        {
+            "path": "images/Add-Azure-VM-Start-Task.png"
         }
     ],
     "content": {
