@@ -15,12 +15,24 @@
         "DeploymentGroup"
     ],
     "version": {
-        "Major": 0,
+        "Major": 1,
         "Minor": 0,
-        "Patch": 14
+        "Patch": 1
     },
     "instanceNameFormat": "Azure VM",
     "inputs": [
+        {
+            "name": "Action",
+            "type": "pickList",
+            "label": "Action",
+            "defaultValue": "Start VM",
+            "required": true,
+            "helpMarkDown": "Start or Stop an Azure Virtual Machine",
+            "options": {
+                "Start VM": "Start an Azure Virtual Machine",
+                "Stop VM": "Stop an Azure Virtual Machine"
+            }
+        },
         {
             "name": "ConnectedServiceName",
             "aliases": [
@@ -33,22 +45,41 @@
             "helpMarkDown": "Select the Azure Resource Manager subscription for the deployment."
         },
         {
-            "name": "resourceGroupName",
+            "name": "ResourceGroupName",
             "type": "pickList",
             "label": "Resource group",
             "required": true,
             "helpMarkDown": "Provide the name of a resource group.",
             "properties": {
-                "EditableOptions": "True"
+                "EditableOptions": true
             }
         },
         {
-            "name": "vmName",
-            "type": "string",
+            "name": "VmName",
+            "type": "pickList",
             "label": "Virtual machine name",
-            "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Provide the name of a virtual machine."
+            "helpMarkDown": "Provide the name of a virtual machine.",
+            "properties": {
+                "EditableOptions": true
+            }
+        }
+    ],
+    "dataSourceBindings": [
+        {
+            "target": "ResourceGroupName",
+            "endpointId": "$(ConnectedServiceName)",
+            "dataSourceName": "AzureResourceGroups"
+        },
+        {
+            "target": "VmName",
+            "endpointId": "$(ConnectedServiceName)",
+            "dataSourceName": "AzureRMResourcesInRGBasedOnType",
+            "parameters": {
+                "ResourceGroupName": "$(ResourceGroupName)",
+                "ResourceType": "Microsoft.Compute/virtualMachines"
+            },
+            "resultTemplate": "{ \"Value\" : \"{{{name}}}\", \"DisplayValue\" : \"{{{name}}}\" }"
         }
     ],
     "execution": {

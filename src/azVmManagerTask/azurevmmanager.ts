@@ -7,6 +7,7 @@ async function run() {
     try {
         var vmName: string = tl.getInput('vmName', true);
         var resourceGroupName = tl.getInput("resourceGroupName", true);
+        var action = tl.getInput("Action", true);
 
         console.log(`vmName=${vmName}`);
         console.log(`resourceGroupName=${resourceGroupName}`);
@@ -18,15 +19,39 @@ async function run() {
 
         var computeClient = new armCompute.ComputeManagementClient(credentials, subscriptionId);
 
-        console.log(`Starting ${vmName}`);
-        computeClient.virtualMachines.start(resourceGroupName, vmName, (error) => 
-        {
-            if(error) {
-                tl.setResult(tl.TaskResult.Failed, `Could not start ${vmName}`);
-            } else {
-                console.log(`Started ${vmName}`)
-            }
-        });
+        switch (action) {
+            case "Start VM":
+                console.log(`Starting ${vmName}`);
+                computeClient.virtualMachines.start(resourceGroupName, vmName, (error) => {
+                    if (error) {
+                        tl.setResult(tl.TaskResult.Failed, `Could not start ${vmName}`);
+                    } else {
+                        console.log(`Started ${vmName}`);
+                    }
+                });
+                break;
+            case "Stop VM":
+                console.log(`Stopping ${vmName}`);
+                computeClient.virtualMachines.powerOff(resourceGroupName, vmName, (error) => {
+                    if (error) {
+                        tl.setResult(tl.TaskResult.Failed, `Could not stop ${vmName}`);
+                    } else {
+                        console.log(`Stopped ${vmName}`);
+                        console.log(`Deallocating ${vmName}`);
+                        computeClient.virtualMachines.deallocate(resourceGroupName, vmName, (error) => {
+                            if (error) {
+                                tl.setResult(tl.TaskResult.Failed, `Could not deallocate ${vmName}`);
+                            } else {
+                                console.log(`Deallocated ${vmName}`)
+                            }
+                        });
+                    }
+                });
+                break;
+            default:
+                throw "InvalidAction";
+        }
+
     }
     catch (err) {
         tl.setResult(tl.TaskResult.Failed, err.message);
