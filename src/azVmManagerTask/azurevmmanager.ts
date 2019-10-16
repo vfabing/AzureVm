@@ -1,6 +1,6 @@
-import tl = require("vsts-task-lib/task");
-import armCompute = require("azure-arm-rest/azure-arm-compute");
-import { AzureRMEndpoint } from 'azure-arm-rest/azure-arm-endpoint';
+import tl = require("azure-pipelines-task-lib/task");
+import armCompute = require("azure-arm-rest-v2/azure-arm-compute");
+import { AzureRMEndpoint } from 'azure-arm-rest-v2/azure-arm-endpoint';
 import path = require("path");
 
 async function run() {
