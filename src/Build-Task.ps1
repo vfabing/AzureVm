@@ -88,7 +88,8 @@ function Update-TaskManifest ([int]$MajorVersionNumber, [int]$MinorVersionNumber
     if (-Not ($IsPublic)) {
         Write-Output "Update-TaskManifest IsPublic = false";
         $TaskJson.id = "895e12ba-6cdf-45be-99ff-c5699db169b8";
-        if (-Not ($TaskJson.friendlyName.Contains("-private"))) {
+        if (-Not ($TaskJson.name.Contains("-private"))) {
+            $TaskJson.name = "$($TaskJson.name)-private";
             $TaskJson.friendlyName = "$($TaskJson.friendlyName)-private";
             $TaskJson.description = "$($TaskJson.description)-private";
         }
@@ -96,7 +97,8 @@ function Update-TaskManifest ([int]$MajorVersionNumber, [int]$MinorVersionNumber
     else {
         Write-Output "Update-TaskManifest IsPublic = true";
         $TaskJson.id = "d8a5bb69-bcfa-43eb-943d-692e191805fd";
-        if ($TaskJson.friendlyName.Contains("-private")) {
+        if ($TaskJson.name.Contains("-private")) {
+            $TaskJson.name = $TaskJson.name -replace "-private";
             $TaskJson.friendlyName = $TaskJson.friendlyName -replace "-private";
             $TaskJson.description = $TaskJson.description -replace "-private";
         }
@@ -133,10 +135,10 @@ if ($PatchVersionNumber -lt -1) {
     $PatchVersionNumber = Get-CurrentPatchNumberFromTaskManifest
 }
 
-If (Test-Path -Path "azVmManagerTask/node_modules/azure-arm-rest/openssl/OpenSSL License.txt") { 
+If (Test-Path -Path "azVmManagerTask/node_modules/azure-arm-rest-v2/openssl/OpenSSL License.txt") {
     Write-Output "Whitespace in filename found [[OpenSSL License.txt]]";
     Write-Output "Renaming to  [[OpenSSL_License.txt]]";
-    Rename-Item -Path "azVmManagerTask/node_modules/azure-arm-rest/openssl/OpenSSL License.txt" -NewName "OpenSSL_License.txt"
+    Rename-Item -Path "azVmManagerTask/node_modules/azure-arm-rest-v2/openssl/OpenSSL License.txt" -NewName "OpenSSL_License.txt"
 }
 
 Write-Output "Version Number $($MajorVersionNumber).$($MinorVersionNumber).$($PatchVersionNumber)"
