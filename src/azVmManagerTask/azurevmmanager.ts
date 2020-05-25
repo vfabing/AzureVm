@@ -22,30 +22,44 @@ async function run() {
         switch (action) {
             case "Start VM":
                 console.log(`Starting ${vmName}`);
-                computeClient.virtualMachines.start(resourceGroupName, vmName, (error) => {
+                computeClient.virtualMachines.start(resourceGroupName, vmName, (error: any, result?: any, request?: any, response?: any): void => {
                     if (error) {
                         tl.setResult(tl.TaskResult.Failed, `Could not start ${vmName}`);
+                        tl.debug(`error: ${error}`);
                     } else {
                         console.log(`Started ${vmName}`);
+                        tl.setResult(tl.TaskResult.Succeeded, "");
                     }
+                    if(result) tl.debug(`result: ${result}`);
+                    if(request) tl.debug(`request: ${request}`);
+                    if(response) tl.debug(`response: ${response}`);
                 });
                 break;
             case "Stop VM":
                 console.log(`Stopping ${vmName}`);
-                computeClient.virtualMachines.powerOff(resourceGroupName, vmName, (error) => {
+                computeClient.virtualMachines.powerOff(resourceGroupName, vmName, (error: any, result?: any, request?: any, response?: any): void => {
                     if (error) {
                         tl.setResult(tl.TaskResult.Failed, `Could not stop ${vmName}`);
+                        tl.debug(`Stopping-error: ${error}`);
                     } else {
                         console.log(`Stopped ${vmName}`);
                         console.log(`Deallocating ${vmName}`);
-                        computeClient.virtualMachines.deallocate(resourceGroupName, vmName, (error) => {
+                        computeClient.virtualMachines.deallocate(resourceGroupName, vmName, (error: any, result?: any, request?: any, response?: any): void => {
                             if (error) {
                                 tl.setResult(tl.TaskResult.Failed, `Could not deallocate ${vmName}`);
+                                tl.debug(`Deallocating-error: ${error}`);
                             } else {
-                                console.log(`Deallocated ${vmName}`)
+                                console.log(`Deallocated ${vmName}`);
+                                tl.setResult(tl.TaskResult.Succeeded, "");
                             }
+                            if(result) tl.debug(`Deallocating-result: ${result}`);
+                            if(request) tl.debug(`Deallocating-request: ${request}`);
+                            if(response) tl.debug(`Deallocating-response: ${response}`);
                         });
                     }
+                    if(result) tl.debug(`Stopping-result: ${result}`);
+                    if(request) tl.debug(`Stopping-request: ${request}`);
+                    if(response) tl.debug(`Stopping-response: ${response}`);
                 });
                 break;
             default:
