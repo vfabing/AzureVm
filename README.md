@@ -1,6 +1,6 @@
 # AzureVm
 
-[Manage Publishers & Extensions](https://marketplace.visualstudio.com/manage/publishers/vfabing?auth_redirect=True)
+[Azure Virtual Machine Manager Task](https://marketplace.visualstudio.com/items?itemName=vfabing.AzureVirtualMachineManagerTask)
 
 ## Prerequisites
 - Install [NodeJS](https://nodejs.org/en/download/)
